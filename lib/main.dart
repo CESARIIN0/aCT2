@@ -1,41 +1,102 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      // Application name
-      title: 'Flutter Hello World',
-      // Application theme data, you can set the colors for the application as
-      // you want
-      theme: ThemeData(
-        // useMaterial3: false,
-        primarySwatch: Colors.blue,
-      ),
-      // A widget which will be started on application startup
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      debugShowCheckedModeBanner: false,
+      home: HomeScreen(),
     );
   }
 }
 
-class MyHomePage extends StatelessWidget {
-  final String title;
-  const MyHomePage({super.key, required this.title});  
-
+class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // The title text which will be shown on the action bar
-        title: Text(title),
+        title: Text('Colección de Tarjetas'),
+        backgroundColor: Colors.green,
       ),
-      body: Center(
-        child: Text(
-          'Hello, World!',
+      body: Padding(
+        padding: const EdgeInsets.all(5.0),
+        child: Column(
+          children: [
+            CardItem(
+              title: 'Elemento A',
+              subtitle: 'Descripción A',
+              icon: Icons.access_alarm,
+              imageUrl: 'https://via.placeholder.com/160',
+              onPressed: () {},
+            ),
+            CardItem(
+              title: 'Elemento B',
+              subtitle: 'Descripción B',
+              icon: Icons.beach_access,
+              imageUrl: 'https://via.placeholder.com/160',
+              onPressed: () {},
+            ),
+            CardItem(
+              title: 'Elemento C',
+              subtitle: 'Descripción C',
+              icon: Icons.cake,
+              imageUrl: 'https://via.placeholder.com/160',
+              onPressed: () {},
+            ),
+            CardItem(
+              title: 'Elemento D',
+              subtitle: 'Descripción D',
+              icon: Icons.directions_bike,
+              imageUrl: 'https://via.placeholder.com/160',
+              onPressed: () {},
+            ),
+            CardItem(
+              title: 'Elemento E',
+              subtitle: 'Descripción E',
+              icon: Icons.eco,
+              imageUrl: 'https://via.placeholder.com/160',
+              onPressed: () {},
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class CardItem extends StatelessWidget {
+  final String title;
+  final String subtitle;
+  final IconData icon;
+  final String imageUrl;
+  final VoidCallback onPressed;
+
+  const CardItem({
+    required this.title,
+    required this.subtitle,
+    required this.icon,
+    required this.imageUrl,
+    required this.onPressed,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      elevation: 5,
+      child: ListTile(
+        leading: CircleAvatar(
+          backgroundImage: NetworkImage(imageUrl),
+        ),
+        title: Text(title, style: TextStyle(fontWeight: FontWeight.bold)),
+        subtitle: Text(subtitle),
+        trailing: IconButton(
+          icon: Icon(icon, color: Colors.green),
+          onPressed: onPressed,
         ),
       ),
     );
